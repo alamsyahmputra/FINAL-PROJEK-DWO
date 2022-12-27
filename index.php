@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="assets/vendors/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/d5704e3023.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/vendors/iconly/bold.css">
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+</head>
+
+<body>
+    <?php
+    include 'connect_dwo.php';
+
+    $query = mysqli_query($conn, 'SELECT count(OrderQty) as count FROM fact_sales');
+    $row = mysqli_fetch_array($query);
+
+    $query2 = mysqli_query($conn, 'SELECT count(ReceivedQty) as count FROM fact_purchase');
+    $row2 = mysqli_fetch_array($query2);
+
+    $query3 = mysqli_query($conn, 'SELECT count(CustomerID) as count FROM store');
+    $row3 = mysqli_fetch_array($query3);
+
+    $query4 = mysqli_query($conn, 'SELECT count(ProductID) as count FROM product');
+    $row4 = mysqli_fetch_array($query4);
+
+    $query5 = mysqli_query($conn, 'SELECT count(VendorID) as count FROM vendor');
+    $row5 = mysqli_fetch_array($query5);
+    ?>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="logo">
+                            <a href="index.php"><i class="fa-solid fa-database"></i>   Warehouse</a>
+                        </div>
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu bg">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item active ">
+                            <a href="index.php" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="store.php" class='sidebar-link'>
+                                <i class="bi bi-shop"></i>
+                                <span>Store</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="product.php" class='sidebar-link'>
+                                <i class="bi bi-archive"></i>
+                                <span>Product</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="vendor.php" class='sidebar-link'>
+                                <i class="bi bi-building"></i>
+                                <span>Vendor</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="orderqty.php" class='sidebar-link'>
+                                <i class="bi bi-cart"></i>
+                                <span>Order Quantity</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="receivedqty.php" class='sidebar-link'>
+                                <i class="bi bi-pencil-fill"></i>
+                                <span>Received Quantity</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="olap.php" class='sidebar-link'>
+                                <i class="bi bi-box"></i>
+                                <span>Olap</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12 col-lg-12">
+                        <div class="d-flex justify-content-around row">
+                            <div class="col-6 col-lg-6 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row" style="padding-left: 80px;">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon" style="background-color: #b988fc;">
+                                                    <i class="fa-solid fa-cart-shopping"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Order Quantity</h6>
+                                                <h6 class="font-extrabold mb-0"><?php echo number_format($row['count'], 0, ".", ",");
+                                            ?></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-6 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row" style="padding-left: 80px;">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon" style="background-color: #fc5666;">
+                                                    <i class="fa-solid fa-pen"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Received Quantity</h6>
+                                                <h6 class="font-extrabold mb-0"><?php echo number_format($row2['count'], 0, ".", ",");?></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-around row">
+                            <div class="col-6 col-lg-4 col-md-6">
+                                <div class="card" style="background-color: #04d183;">
+                                    <div class="card-body px-4 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon" style="background-color: #1eeb9c;">
+                                                    <i class="fa-solid fa-store"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="font-semibold" style="color: white;">Store</h6>
+                                                <h6 class="font-extrabold mb-0" style="color: white;"><?php echo number_format($row3['count'], 0, ".", ",");?></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-4 col-md-6">
+                                <div class="card" style="background-color: #349beb;">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon" style="background-color: #6bb7f2;">
+                                                    <i class="fa-solid fa-box-archive"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="font-semibold" style="color: white;">Product</h6>
+                                                <h6 class="font-extrabold mb-0" style="color: white;"><?php echo number_format($row4['count'], 0, ".", ",");?></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-4 col-md-6">
+                                <div class="card" style="background-color: #fac219;">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon" style="background-color: #face4b;">
+                                                    <i class="fa-solid fa-building"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="font-semibold" style="color: white;">Vendor</h6>
+                                                <h6 class="font-extrabold mb-0" style="color: white;"><?php echo number_format($row5['count'], 0, ".", ",");?></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4>Profile Visit</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="chart-profile-visit"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="assets/vendors/apexcharts/apexcharts.js"></script>
+    <!-- <script src="assets/js/pages/dashboard.js"></script> -->
+
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        var optionsProfileVisit = {
+            annotations: {
+                position: 'back'
+            },
+            dataLabels: {
+                enabled: false
+            },
+            chart: {
+                type: 'bar',
+                height: 200
+            },
+            fill: {
+                opacity: 1
+            },
+            plotOptions: {},
+            series: [{
+                name: 'sales',
+                data: [9, 20, 30, 20, 10, 20, 30, 20, 10, 20, 30, 200]
+            }],
+            colors: '#435ebe',
+            xaxis: {
+                categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+            },
+        }
+
+        var chartProfileVisit = new ApexCharts(document.querySelector("#chart-profile-visit"), optionsProfileVisit);
+        chartProfileVisit.render();
+    </script>
+</body>
+
+</html>
