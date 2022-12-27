@@ -1,0 +1,8 @@
+1.	Install Xampp atau program yang terdapat package Apache dan Tomcat
+2.	Kemudian klik start pada package MySql, Apache dan Tomcat 
+3.	Download ZIP yang ada di GitHub: https://github.com/alamsyahmputra/FINAL-PROJEK-DWO.git . Extract seluruh file dan folder yang ada
+4.	Seluruh file sebaiknya dijadikan pada 1 folder kemudian simpan pada direktori xampp C:\xampp\htdocs (misalnya nama folder: FINAL-PROJEK-DWO-main)
+5.	Buka Dbeaver atau phpmyadmin. Selanjutnya buatlah database baru dengan nama dwo_multidimensi5.
+6.	Dump database atau import database dwo_multidimensi5.sql yang ada pada folder FINAL-PROJEK-DWO-main
+7.	Selanjutnya masukkan folder Mondrian pada direktori C:\xampp\tomcat\webapps 
+8.	Jalankan alamat http://localhost/dwo/index.php  untuk mengakses dashboard data warehouse
